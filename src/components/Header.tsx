@@ -11,14 +11,14 @@ function Header() {
   ];
 
   return (
-    <header className="dark:bg-gray-800 bg-gray-300 text-white">
+    <header className="dark:bg-gray-900 bg-gray-300 text-white">
       <div className="container mx-auto flex justify-between items-center px-4">
         <div className="flex items-center gap-8">
           <div>
             <Link to={"/"}>
-              <h1 className="text-xl font-bold">Crypto Tracker</h1>
+              <h1 className="text-xl font-bold text-gray-900 dark:text-gray-200">Crypto Tracker</h1>
             </Link>
-            <p className="text-sm">
+            <p className="text-sm text-gray-900 dark:text-gray-200">
               by{" "}
               <a
                 className="hover:underline"
@@ -38,8 +38,8 @@ function Header() {
                 <Link
                   to={page.path}
                   key={page.name}
-                  className={`font-semibold hover:text-gray-400 ${
-                    page.name === currentPage ? "text-gray-400" : ""
+                  className={`font-semibold hover:text-gray-600 dark:hover:text-gray-400 text-gray-900 dark:text-gray-200 ${
+                    page.name === currentPage ? "dark:text-gray-400 text-gray-600" : ""
                   }`}
                   onClick={() => setCurrentPage(page.name)}
                 >
@@ -51,7 +51,7 @@ function Header() {
         </div>
 
         <div className="flex items-center space-x-4">
-            <select name="lenguage" className="bg-transparent text-white rounded outline-none">
+            <select name="lenguage" className="bg-transparent rounded outline-none text-gray-900 dark:text-gray-200">
                 <option className="text-gray-800 font-semibold" value="en">English</option>
                 <option className="text-gray-800 font-semibold" value="es">Spanish</option>
             </select>
