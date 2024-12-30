@@ -8,6 +8,6 @@ export interface Crypto {
   marketCapUsd: number;
   volumeUsd24Hr: number;
   priceUsd: number;
-  changePercent24Hr: number;
+  changePercent24Hr: string;
   vwap24Hr: number;
 }
