@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import CryptoItem from "./CryptoItem";
 
-import { getCoins } from "../services/coins.service";
+import ExchangeItem from "./ExchangeItem";
 
-import { Crypto } from "../interfaces/Crypto";
+import { getExchanges } from "../services/exchages.service";
 
-function CryptoList() {
-  const [cryptos, setCryptos] = useState<Crypto[]>([]);
+import { Exchange } from "../interfaces/Exchange";
+
+function ExchangesList() {
+  const [exchanges, setExchanges] = useState<Exchange[]>([]);
   const [loading, setLoading] = useState(true);
 
   const { t } = useTranslation();
 
-  const fetchCryptos = async () => {
+  const fetchExchanges = async () => {
     try {
-      const data = await getCoins();
-      setCryptos(data.data);
+      const data = await getExchanges();
+      setExchanges(data.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
@@ -23,10 +24,10 @@ function CryptoList() {
   };
 
   useEffect(() => {
-    fetchCryptos();
+    fetchExchanges();
 
     const interval = setInterval(() => {
-      fetchCryptos();
+      fetchExchanges();
     }, 10000);
 
     return () => clearInterval(interval);
@@ -42,17 +43,14 @@ function CryptoList() {
             <tr className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-sm">
               <th className="px-4 py-2 text-right">{t("rank")}</th>
               <th className="px-4 py-2 text-left">{t("name")}</th>
-              <th className="px-4 py-2 text-right">{t("price")}</th>
-              <th className="px-4 py-2 text-right">{t("market_cap")}</th>
-              <th className="px-4 py-2 text-right">{t("vwap")}</th>
-              <th className="px-4 py-2 text-right">{t("supply")}</th>
+              <th className="px-4 py-2 text-right">{t("tradingPairs")}</th>
               <th className="px-4 py-2 text-right">{t("volume")}</th>
-              <th className="px-4 py-2 text-right">{t("change")}</th>
+              <th className="px-4 py-2 text-right">{t("percentTotalVolume")}</th>
             </tr>
           </thead>
           <tbody>
-            {cryptos.map((crypto, index) => (
-              <CryptoItem key={crypto.id} crypto={crypto} index={index} />
+            {exchanges.map((exchange, index) => (
+              <ExchangeItem key={exchange.exchangeId} exchange={exchange} index={index} />
             ))}
           </tbody>
         </table>
@@ -61,4 +59,4 @@ function CryptoList() {
   );
 }
 
-export default CryptoList;
+export default ExchangesList;

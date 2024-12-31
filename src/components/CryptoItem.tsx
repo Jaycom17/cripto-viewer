@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import { Crypto } from "../interfaces/Crypto";
 
 interface CryptoItemProps {
@@ -6,6 +8,9 @@ interface CryptoItemProps {
 }
 
 function CryptoItem({ crypto, index }: CryptoItemProps) {
+
+  const navigate = useNavigate();
+
   return (
     <tr
       className={`${
@@ -13,6 +18,8 @@ function CryptoItem({ crypto, index }: CryptoItemProps) {
           ? "bg-white dark:bg-gray-700"
           : "bg-gray-50 dark:bg-gray-600"
       } hover:bg-gray-100 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 text-sm`}
+
+      onClick={() => navigate(`/crypto/${crypto.id}`)}
     >
       <td className="px-4 py-2 text-right">{crypto.rank}</td>
       <td className="px-4 py-2 text-right flex items-center gap-2">
