@@ -8,3 +8,12 @@ export const getCoins = async () => {
     throw new Error();
   }
 };
+
+export const getCoin = async (id: string) => {
+  try {
+    const response = await axiosInstance.get(`/assets/${id}`);
+    return response.data;
+  } catch (error) {
+    throw new Error();
+  }
+};
