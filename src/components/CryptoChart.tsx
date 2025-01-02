@@ -25,9 +25,9 @@ import {
     Legend
   );
 
-function CryptoChart({ cryptoId }: { cryptoId?: string }) {
+  function CryptoChart({ cryptoId }: { cryptoId?: string }) {
     const [history, setHistory] = useState<History[]>([]);
-    const [interval, setInterval] = useState<string>("d1");
+    const [interval, setInterval] = useState<string>("m1");
 
     useEffect(() => {
         if (cryptoId) {
@@ -41,20 +41,29 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
         setInterval(newInterval);
     };
 
-    // Preparar los datos para el gráfico
     const chartData = {
-        labels: history.map((item) =>
-            new Date(item.time).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-            })
-        ),
+        labels: history.map((item) => {
+            const date = new Date(item.time);
+            if (interval === "m1" || interval === "m5" || interval === "m15") {
+                return date.toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    day: "numeric",
+                    month: "short",
+                });
+            } else {
+                return date.toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                });
+            }
+        }),
         datasets: [
             {
                 label: `Price (USD) - ${interval}`,
                 data: history.map((item) => parseFloat(item.priceUsd)),
-                borderColor: "rgba(59, 130, 246, 1)", // Azul claro
+                borderColor: "rgba(59, 130, 246, 1)",
                 backgroundColor: "rgba(59, 130, 246, 0.2)",
                 borderWidth: 2,
                 pointRadius: 1,
@@ -69,7 +78,7 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
             legend: {
                 display: true,
                 labels: {
-                    color: "rgb(55, 65, 81)", // Texto oscuro
+                    color: "rgb(55, 65, 81)",
                     font: { size: 12 },
                 },
             },
@@ -78,8 +87,8 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
             x: {
                 title: {
                     display: true,
-                    text: "Time",
-                    color: "rgb(55, 65, 81)", // Texto oscuro
+                    text: interval === "m1" ? "Time" : "Date",
+                    color: "rgb(55, 65, 81)",
                 },
                 ticks: {
                     color: "rgb(55, 65, 81)",
@@ -100,7 +109,7 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
     };
 
     return (
-        <div className="p-4 dark:bg-gray-900 dark:text-gray-100">
+        <div className="p-4 dark:bg-gray-700 dark:text-gray-100">
             <h1 className="text-xl font-bold mb-4">CryptoChart</h1>
             <div className="flex flex-wrap gap-2 mb-4">
                 {["m1", "m5", "m15", "m30", "h1", "h2", "h6", "h12", "d1"].map((int) => (
@@ -111,7 +120,7 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
                             int === interval
                                 ? "bg-blue-500"
                                 : "bg-gray-200 dark:bg-gray-800"
-                        } hover:bg-blue-400 hover:text-white`}
+                        } hover:bg-blue-400`}
                     >
                         {int.toUpperCase()}
                     </button>
@@ -128,7 +137,7 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
                                 legend: {
                                     ...chartOptions.plugins.legend,
                                     labels: {
-                                        color: "rgb(255, 255, 255)", // Para modo oscuro
+                                        color: "rgb(255, 255, 255)",
                                     },
                                 },
                             },
@@ -136,7 +145,7 @@ function CryptoChart({ cryptoId }: { cryptoId?: string }) {
                                 x: {
                                     ...chartOptions.scales.x,
                                     ticks: {
-                                        color: "rgb(255, 255, 255)", // Ejes modo oscuro
+                                        color: "rgb(255, 255, 255)",
                                     },
                                 },
                                 y: {
