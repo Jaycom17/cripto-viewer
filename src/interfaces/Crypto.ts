@@ -5,9 +5,9 @@ export interface Crypto {
   name: string;
   supply: number;
   maxSupply: number;
-  marketCapUsd: number;
+  marketCapUsd: string;
   volumeUsd24Hr: number;
-  priceUsd: number;
+  priceUsd: string;
   changePercent24Hr: string;
   vwap24Hr: number;
 }
