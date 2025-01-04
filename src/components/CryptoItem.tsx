@@ -17,7 +17,7 @@ function CryptoItem({ crypto, index }: CryptoItemProps) {
         index % 2 === 0
           ? "bg-white dark:bg-gray-700"
           : "bg-gray-50 dark:bg-gray-600"
-      } hover:bg-gray-100 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 text-sm`}
+      } hover:bg-gray-100 dark:hover:bg-gray-500 text-gray-700 dark:text-gray-300 text-sm cursor-pointer`}
 
       onClick={() => navigate(`/crypto/${crypto.id}`)}
     >

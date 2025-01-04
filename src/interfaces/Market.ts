@@ -4,8 +4,8 @@ export interface Market {
     quoteId: string
     baseSymbol: string
     quoteSymbol: string
-    volumeUsd24Hr: string
-    priceUsd: string
+    volumeUsd24Hr: number
+    priceUsd: number
     volumePercent: string
   }
   

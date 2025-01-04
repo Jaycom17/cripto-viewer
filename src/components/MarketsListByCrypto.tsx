@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 import { getMarketsByCryptoId } from "../services/market.service";
 
-import ExchangeItem from "./ExchangeItem";
+import MarketItem from "./MarketItem";
 
 import { Market } from "../interfaces/Market";
 
@@ -31,7 +31,7 @@ function MarketsListByCrypto({ cryptoId }: { cryptoId?: string }) {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [cryptoId]);
 
   return (
     <div className="container mx-auto p-4">
@@ -41,16 +41,16 @@ function MarketsListByCrypto({ cryptoId }: { cryptoId?: string }) {
         <table className="min-w-full border-collapse bg-gray-200 dark:bg-gray-800 dark:text-gray-300 text-gray-700 rounded-lg overflow-hidden shadow-lg">
           <thead>
             <tr className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-sm">
-              <th className="px-4 py-2 text-right">{t("rank")}</th>
-              <th className="px-4 py-2 text-left">{t("name")}</th>
-              <th className="px-4 py-2 text-right">{t("tradingPairs")}</th>
-              <th className="px-4 py-2 text-right">{t("volume")}</th>
-              <th className="px-4 py-2 text-right">{t("percentTotalVolume")}</th>
+              <th className="px-4 py-2 text-left">Exchage</th>
+              <th className="px-4 py-2 text-right">Par</th>
+              <th className="px-4 py-2 text-right">Price</th>
+              <th className="px-4 py-2 text-right">Volume (24h)</th>
+              <th className="px-4 py-2 text-right">Volume %</th>
             </tr>
           </thead>
           <tbody>
-            {markets.map((exchange, index) => (
-              <ExchangeItem key={exchange.exchangeId} exchange={exchange} index={index} />
+            {markets.map((market, index) => (
+              <MarketItem key={market.baseId} market={market} index={index} />
             ))}
           </tbody>
         </table>

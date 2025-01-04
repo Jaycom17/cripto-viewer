@@ -1,5 +1,6 @@
 import CryptoGeneral from "../components/CryptoGeneral";
 import CryptoChart from "../components/CryptoChart";
+import MarketsListByCrypto from "../components/MarketsListByCrypto";
 
 import { useParams } from "react-router-dom";
 
@@ -24,7 +25,7 @@ function crypto() {
         <main>
             <CryptoGeneral crypto={crypto}/>
             <CryptoChart cryptoId={crypto?.id}/>
-            <h1>Crypto: {coinId}</h1>
+            <MarketsListByCrypto cryptoId={crypto?.id}/>
         </main>
     )
 }
