@@ -41,11 +41,11 @@ function MarketsListByCrypto({ cryptoId }: { cryptoId?: string }) {
         <table className="min-w-full border-collapse bg-gray-200 dark:bg-gray-800 dark:text-gray-300 text-gray-700 rounded-lg overflow-hidden shadow-lg">
           <thead>
             <tr className="bg-gray-300 dark:bg-gray-900 text-gray-700 dark:text-gray-300 text-sm">
-              <th className="px-4 py-2 text-left">Exchage</th>
-              <th className="px-4 py-2 text-right">Par</th>
-              <th className="px-4 py-2 text-right">Price</th>
-              <th className="px-4 py-2 text-right">Volume (24h)</th>
-              <th className="px-4 py-2 text-right">Volume %</th>
+              <th className="px-4 py-2 text-left">{t("exchange")}</th>
+              <th className="px-4 py-2 text-right">{t("par")}</th>
+              <th className="px-4 py-2 text-right">{t("price")}</th>
+              <th className="px-4 py-2 text-right">{t("volume")}</th>
+              <th className="px-4 py-2 text-right">{t("volumePercent")} %</th>
             </tr>
           </thead>
           <tbody>

@@ -10,24 +10,25 @@ import { Crypto } from "../interfaces/Crypto";
 import { getCoin } from "../services/coins.service";
 
 function crypto() {
-    const [crypto, setCrypto] = useState<Crypto | null>(null);
+  const [crypto, setCrypto] = useState<Crypto | null>(null);
 
-    const { coinId } = useParams();
+  const { coinId } = useParams();
 
-    useEffect(() => {
-        getCoin(coinId!)
-            .then((data) => setCrypto(data.data))
-            .catch(() => setCrypto(null));
-    }, [coinId]);
+  useEffect(() => {
+    getCoin(coinId!)
+      .then((data) => setCrypto(data.data))
+      .catch(() => setCrypto(null));
+  }, [coinId]);
 
-
-    return (
-        <main>
-            <CryptoGeneral crypto={crypto}/>
-            <CryptoChart cryptoId={crypto?.id}/>
-            <MarketsListByCrypto cryptoId={crypto?.id}/>
-        </main>
-    )
+  return (
+    <main>
+      <CryptoGeneral crypto={crypto} />
+      <div>
+        <CryptoChart cryptoId={crypto?.id} />
+      </div>
+      <MarketsListByCrypto cryptoId={crypto?.id} />
+    </main>
+  );
 }
 
 export default crypto;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getHistory } from "../services/history.service";
 import { History } from "../interfaces/History";
+import { useTranslation } from "react-i18next";
 
 import {
   Chart as ChartJS,
@@ -24,20 +25,21 @@ ChartJS.register(
   Legend
 );
 
-const intervalOptions = [
-    { data: "m1", label: "1 day" },
-    { data: "m5", label: "5 days" },
-    { data: "m15", label: "15 days" },
-    { data: "m30", label: "30 days" },
-    { data: "h1", label: "1 month" },
-    { data: "h2", label: "2 months" },
-    { data: "h6", label: "6 months" },
-    { data: "h12", label: "1 year" },
-];
-
 function CryptoChart({ cryptoId }: { cryptoId?: string }) {
   const [history, setHistory] = useState<History[]>([]);
   const [interval, setInterval] = useState<string>("m1");
+
+  const { t } = useTranslation();
+
+  const intervalOptions = [
+    { data: "m1", label: t("oneday") },
+    { data: "m5", label: t("fivedays") },
+    { data: "m15", label: t("fifteendays") },
+    { data: "h1", label: t("thirtydays") },
+    { data: "h2", label: t("twomoths") },
+    { data: "h6", label: t("sixmonths") },
+    { data: "h12", label: t("oneyear") },
+];
 
   useEffect(() => {
     if (cryptoId) {

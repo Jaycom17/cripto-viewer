@@ -34,13 +34,13 @@ function CryptoItem({ crypto, index }: CryptoItemProps) {
         {new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-        }).format(crypto.priceUsd)}
+        }).format(parseFloat(crypto.priceUsd))}
       </td>
       <td className="px-4 py-2 text-right">
         {new Intl.NumberFormat("en-US", {
           style: "currency",
           currency: "USD",
-        }).format(crypto.marketCapUsd)}
+        }).format(parseFloat(crypto.marketCapUsd))}
       </td>
       <td className="px-4 py-2 text-right">
         {new Intl.NumberFormat("en-US", {
